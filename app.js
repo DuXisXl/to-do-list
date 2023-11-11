@@ -3,6 +3,7 @@ const path = require('path');
 
 const checkListRouter = require('./src/routes/checklist');
 const rootRouter = require('./src/routes/index');
+const methodOverride = require('method-override');
 
 
 require('./config/database');
@@ -11,6 +12,7 @@ require('./config/database');
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(methodOverride('_method', { methods: ['POST', 'GET']}));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -21,5 +23,5 @@ app.use('/', rootRouter);
 app.use('/checklists', checkListRouter);
 
 app.listen(3000, () => {
-    console.log('Servidor foi iniciado')
+  console.log('Servidor foi iniciado');
 })

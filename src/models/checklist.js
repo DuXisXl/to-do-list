@@ -8,4 +8,4 @@ const checklistSchema = mongoose.Schema({
   }]
 })
 
-module.exports = mongoose.model('Checklist', checklistSchema)
+module.exports = mongoose.model('Checklist', checklistSchema);
