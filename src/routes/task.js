@@ -44,4 +44,16 @@ checklistsDependentRoute.post('/:id/tasks', async (req, res) => {
     }
 })
 
+simpleRouter.put('/:id', async (req, res) => {
+    let task = await Task.findById(req.params.id);
+    try {
+        task.set(req.body.task);
+        await task.save();
+        res.status(200).json({ task });
+    } catch (error) {
+        let erros = error.erros;
+        res.status(422).json({ task: {... erros}})
+    }
+})
+
 module.exports = { checklistsDependent: checklistsDependentRoute, simple: simpleRouter}
